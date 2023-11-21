@@ -1,8 +1,4 @@
-@import '../../../../../../assets/scss/sass-config.scss';
-.component-container {
-  background-color: $gray;
-  height: 100%;
-}
+@import "../../../../../../assets/scss/sass-config.scss";
 .task-infor {
   &__taskname {
     margin-top: 5px;

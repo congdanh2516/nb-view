@@ -1,6 +1,7 @@
 @import '../../../../../../assets/scss/sass-config.scss';
-body {
+.component-container {
   background-color: $gray;
+  height: 100%;
 }
 .task-infor {
   &__taskname {

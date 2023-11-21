@@ -1,0 +1,57 @@
+@import '../../../../../../assets/scss/sass-config.scss';
+
+body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $gray;
+    
+  }
+
+.nb {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    text-align: left;
+    width: 40%;
+
+    b {
+        font-size: 20px;
+        font-weight: 700;
+        margin: 10px 0;
+    }
+
+    &__title {
+        margin-top: 10px;
+    }
+
+    &__title, &__general-info__field {
+        margin: 10px 0;
+        padding: 5px 30px;
+        border: 2px;
+        background: white;
+        text-align: left;
+        border-radius: 5px;
+        b {
+            font-size: 25px;
+            font-weight: 700;
+        }
+    }
+    &__general-info {
+        &__field {
+            margin: 20px 0;
+            &__name, &__content {
+                margin: 5px 0 10px 0;
+                padding: 5px 0;
+            }
+    
+            &__content {
+                border: 1px;
+                border-bottom: solid $dark-blue;
+            }
+        }
+        
+    }
+}

@@ -1,2 +1,6 @@
+<div *ngIf="confirm.isDisplay">
+    <app-confirm-box-modal [message]="confirm.message" [cancel_var]="confirm.isCancel"></app-confirm-box-modal>
+</div>
 <router-outlet></router-outlet>
+
 

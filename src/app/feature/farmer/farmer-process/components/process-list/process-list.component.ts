@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-process-list',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./process-list.component.scss']
 })
 export class ProcessListComponent {
-
+  faPlus = faPlus;
+  personalProcessBool : Boolean = true; //true: co quy trinh, false: chua co quy trinh
 }

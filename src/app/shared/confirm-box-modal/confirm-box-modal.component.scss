@@ -50,7 +50,7 @@
     transition: background-color .5s ease;
     background-color: transparent;
     &--active {
-        background-color: rgba(0, 0, 0, 0.055);
+        background-color: rgba(0, 0, 0, 0.15);
         transition: background-color .5s ease;
     }
 }
@@ -91,7 +91,7 @@
         justify-content: right;
         padding: 15px;
         &__accept {
-            @include button(90px, 40px, $dark-blue);
+            @include button(100px, 40px, $dark-blue);
         }
         &__cancel {
             margin-right: 10px;

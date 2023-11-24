@@ -7,8 +7,6 @@ import { ConfirmBoxModalService } from 'src/app/core/services/confirm-box-modal.
   styleUrls: ['./confirm-box-modal.component.scss']
 })
 export class ConfirmBoxModalComponent {
-  @Input() title : string = "Bạn có muốn xóa công việc này không?";
-  @Input() description: string = "Công việc sẽ được sẽ vĩnh viễn không thể khôi phục được"
 
   @Input()cancel_var: boolean = false;
   @Input()message: any = {title: 'Bạn có muốn xóa công việc này không?', description: 'Công việc sẽ được xóa vĩnh viễn và không thể khôi phục lại'};
@@ -17,43 +15,41 @@ export class ConfirmBoxModalComponent {
   approval: boolean = false;
   fadeBackground: boolean = false;
 
-  constructor(private confirm_sv: ConfirmBoxModalService) {} 
-
-  ngOnChanges(changes: SimpleChanges): void {
-    this.fadeBackground = true;
-    this.cancel_var = false;
-    this.message;
-    console.log("asdsads: ", this.cancel_var);           
-  }
+  constructor(private confirm_sv: ConfirmBoxModalService) {
+    this.confirm_sv.getMessage().subscribe(data7 => {
+      // console.log("data7: ", data7);
+      this.message=data7.message;
+      if(data7.action=='close') {
+        // console.log("close");
+        this.cancel_var=true;
+        this.fadeBackground=false;
+        setTimeout(() => {
+          this.isDisplay=false;
+        }, 500);
+      } else {
+        // console.log("open");
+        this.cancel_var=false;
+        this.isDisplay=data7.isDisplay;
+      }
+    })
+  } 
 
   ngOnInit(): void {
-    console.log("123");
+    
   }
 
   cancel() {
     this.confirm_sv.sendMessage({
-      approval: false,
+      action:'close',
+      acceptance: false
     })
-    this.cancel_var = true;
-    this.fadeBackground = false;
-    setTimeout(() => {
-      this.confirm_sv.sendMessage({
-        isDisplay: false
-      })
-    }, 5000)
   }
 
-  approve() {
+  accept() {
     this.confirm_sv.sendMessage({
-      approval: true,
+      action:'close',
+      acceptance: true
     })
-    this.cancel_var = true;
-    this.fadeBackground = false;
-    setTimeout(() => {
-      this.confirm_sv.sendMessage({
-        isDisplay: false
-      })
-    }, 500)
   }
 
 }

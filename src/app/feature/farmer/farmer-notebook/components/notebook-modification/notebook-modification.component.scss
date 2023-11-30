@@ -1,0 +1,212 @@
+section{
+    background-color: #E9EDF0;
+}
+h2{
+    margin-bottom: -2%;
+    margin-left: 2%;
+    padding: 1%;
+}
+
+h3{
+    margin-top: -1%;
+    margin-bottom: 4%;
+    margin-left: 1%;
+}
+
+.mat-divider, p ,h6{
+    margin: 4%;
+}
+
+form{
+    display: flex;
+}
+
+div{
+    background-color: #E9EDF0;
+    position: relative;
+    margin-top: 1%;
+    margin-bottom: 3%;
+    margin-left: 1%;
+    margin-right: 3%;
+    padding: 1%;
+}
+
+@media (max-width: 768px) {
+    .mat-card-actions {
+      text-align: center; /* Định vị các nút ở giữa trên màn hình nhỏ */
+    }
+  }
+
+
+
+input{
+    background-color: #f8f8f8;
+    text-align: left;
+    outline: none;
+}
+
+input:focus {
+    outline: none;
+}
+
+input:hover{
+    outline: none;
+}
+
+select{
+    background-color: #f8f8f8;
+    text-align: left;
+    outline: none;
+}
+
+
+select:hover{
+    outline: none;
+}
+
+
+
+select:focus{
+    outline: none;
+}
+
+button{
+    height: 40px;
+    width: 120px;
+    color: #f8f8f8;
+    background-color: #1a2848;
+    position: relative;
+    margin: 2%;
+    border-radius: 5px;
+    text-align: center;
+    
+}
+
+form{
+    background-color: #E9EDF0;
+}
+
+ul{
+    width: 90%;
+    position: relative;
+    left: 7%;
+    background-color: #E9EDF0;
+}
+
+mat-divider{
+    border: 2px solid black;
+}
+
+mat-chip{
+    background-color: #f8f8f8;
+}
+
+mat-expansion-panel-header{
+    background-color: #E9EDF0;
+    border-bottom-color: 2px solid black;
+}
+
+
+
+.button_right{
+    left: 50%;
+}
+.button_left{
+    left: 77%;
+}
+
+.button_delete{
+    left: 71%;
+}
+
+
+.Heading{
+    position: relative;
+    top: 12%;
+}
+
+.Keyboard{
+    position: relative;
+    top: 25%;
+}
+
+.mat-divider_small{
+    width: 50%;
+}
+
+.small_div{
+    width: 70%;
+}
+
+.create_div{
+    margin-bottom: 10px;
+}
+
+.row{
+    background-color: #E9EDF0;
+}
+
+.select{
+    height: 100%;
+    width: 80%;
+    background-color: #f8f8f8;
+    text-align: left;
+    border:solid;
+    border-top-color: #f8f8f8;
+    border-left-color: #f8f8f8;
+    border-right-color: #f8f8f8;
+    border-bottom-color: #f8f8f8;
+}
+
+.input{
+    height: 100%;
+    width: 85%;
+    border:solid;
+    border-top-color: #f8f8f8;
+    border-left-color: #f8f8f8;
+    border-right-color: #f8f8f8;
+    border-bottom-color: #f8f8f8;
+}
+
+.bottom_border{
+    background-color: #E9EDF0;
+    border: solid;
+    border-top-color: #E9EDF0;
+    border-left-color: #E9EDF0;
+    border-right-color: #E9EDF0;
+    border-bottom-color: #000000;
+    border-radius: 1%;
+}
+
+.container-fluid{
+    background-color: #E9EDF0;
+}
+
+.highlight{
+    background-color: #f8f8f8;
+}
+
+
+
+
+
+.create_button{
+    height: 50px;
+    width: 50px;
+    top: 90px;
+    left: 470px;
+    background-color: #E9EDF0;
+    color: black;
+    border: #E9EDF0;
+}
+
+.button_remove{
+    background-color: #E9EDF0;
+}
+
+.p_big{
+    font-size: 20px;
+}
+
+
+

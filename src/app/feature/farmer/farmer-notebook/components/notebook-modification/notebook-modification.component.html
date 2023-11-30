@@ -1,1 +1,96 @@
-<p>notebook-modification works!</p>
+<section>
+    <h2>Modify notebook</h2>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6 highlight">
+                <h3>Notebook</h3>
+                    <mat-expansion-panel (closed)=false hideToggle>
+                        <mat-expansion-panel-header>
+                            <p class="p_big">Soil preparation</p>
+                        </mat-expansion-panel-header>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Type</th>
+                                        <th>Task</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of listDataField">
+                                        <td><span>{{item.Title}}</span></td>
+                                        <td><span>{{item.Type}}</span></td>
+                                        <td><span>{{item.Task}}</span></td>
+                                        <td><button type="button" (click)="removeField(item)">remove</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                      </mat-expansion-panel>
+                    <div class="highlight">
+                        <button class="create_button" (click)="addField()"><mat-icon fontIcon="+"></mat-icon></button>
+                    </div>
+                <div class="small_div">
+                    <h6>Create field</h6>
+                    <div class=" container">
+                        <form [formGroup]="userForm" class="row">
+                            <div class="highlight col-lg-6">
+                                <mat-icon class="Heading" fontIcon="H"></mat-icon>
+                                <input type='text' name="Title" formControlName="Title" placeholder="| Title" class="input"/>
+                            </div>
+                            <div class="highlight col-lg-5">
+                                <mat-icon class="Keyboard" fontIcon="keyboard"></mat-icon>
+                                <select class="select" name="Type" formControlName="Type">
+                                    <option value="text">Text</option>
+                                    <option value="image">image</option>
+                                </select>
+                            </div>
+                            <div class="row small_div">
+                                <mat-divider class="mat-divider_small"></mat-divider>
+                                <div *ngIf="selectedItems.length > 0; else noTask">
+                                    <p>Assign related tasks</p>
+                                </div>
+                                <ng-template #noTask >
+                                    <p>Related tasks</p>
+                                </ng-template>
+                                <textarea name="Task" formControlName="Task" #myTextarea>
+                                </textarea>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <button class="button_left">Save</button>
+            </div>
+            <div class="col-lg-5 highlight">
+                <h3>Process name</h3>
+                <form>
+                    <div class="selectAll">
+                    <ul *ngFor="let item of list">
+                        <input
+                        type="checkbox"
+                        id="{{ item.id }}"
+                        name="checked"
+                        [(ngModel)]="item.checked"
+                        (change)="onChecked(item.id, item.checked)"
+                        />
+                        <label for="{{ item.id }}">{{ item.title }}</label>
+                    </ul>
+                    </div>
+                </form>
+                <p class="text-selected-value">Selected Value: </p>
+                    <div #myDiv>
+                        <div *ngIf="selectedItems.length > 0; else noSelection">
+                            <section *ngFor="let item of selectedItems">
+                                <p>{{item.title}}</p>,
+                            </section>
+                        </div>
+                        <ng-template #noSelection >
+                            <p>No item selected</p>
+                        </ng-template>
+                    </div>
+                    <p>You are choosing the tasks related to "Field name"</p>
+                    <button (click)="clearAll()">Clear All</button>
+                    <button class="button_right" (click)="addTask()">Assign</button>
+            </div>
+        </div>
+    </div>
+</section>

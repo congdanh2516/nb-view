@@ -87,11 +87,15 @@ form{
 }
 
 ul{
-    width: 90%;
+    height: 50px;
+    width: 94%;
     position: relative;
     left: 7%;
     background-color: #E9EDF0;
+    text-align: left;
 }
+
+
 
 mat-divider{
     border: 2px solid black;
@@ -99,6 +103,8 @@ mat-divider{
 
 mat-chip{
     background-color: #f8f8f8;
+    margin: 8px;
+    padding: 4px;
 }
 
 mat-expansion-panel-header{
@@ -106,28 +112,47 @@ mat-expansion-panel-header{
     border-bottom-color: 2px solid black;
 }
 
+table, th, td {
+    text-align: center;
+    margin: 10px;
+    padding: 10px;
+    background-color: #E9EDF0;
+    border: 3px solid;
+  }
 
 
-.button_right{
-    left: 50%;
+.th_title{
+    width: 100px;
 }
-.button_left{
-    left: 77%;
+
+.th_type{
+    width: 50px;
 }
+
+.th_task{
+    width: 400px;
+}
+
+.th_button{
+    width: 75px;
+}
+
+.button_table{
+    width: 70px;
+    font-size: 14px;
+}
+
 
 .button_delete{
     left: 71%;
 }
 
-
-.Heading{
+.div_parent{
+    height: 50px;
+    width: 100%;
     position: relative;
-    top: 12%;
-}
-
-.Keyboard{
-    position: relative;
-    top: 25%;
+    background-color: #E9EDF0;
+    text-align: left;
 }
 
 .mat-divider_small{
@@ -148,7 +173,7 @@ mat-expansion-panel-header{
 
 .select{
     height: 100%;
-    width: 80%;
+    width: 150px;
     background-color: #f8f8f8;
     text-align: left;
     border:solid;
@@ -159,13 +184,13 @@ mat-expansion-panel-header{
 }
 
 .input{
-    height: 100%;
+    height: 40px;
     width: 85%;
     border:solid;
     border-top-color: #f8f8f8;
     border-left-color: #f8f8f8;
     border-right-color: #f8f8f8;
-    border-bottom-color: #f8f8f8;
+    border-bottom-color: #000000;
 }
 
 .bottom_border{
@@ -206,6 +231,18 @@ mat-expansion-panel-header{
 
 .p_big{
     font-size: 20px;
+}
+.example-chip-list {
+    width: 100%;
+}
+.select{
+    height: 40px;
+    width: 85%;
+    border:solid;
+    border-top-color: #f8f8f8;
+    border-left-color: #f8f8f8;
+    border-right-color: #f8f8f8;
+    border-bottom-color: #000000;
 }
 
 

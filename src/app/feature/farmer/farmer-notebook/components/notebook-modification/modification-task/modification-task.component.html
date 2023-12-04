@@ -1,0 +1,42 @@
+<section>
+    <button (click)="increment()">increment</button>
+    <button (click)="decrement()">decrement</button>
+    <h3>Process name</h3>
+                <div class="selectAll highlight div_checkbox">
+                    <div *ngFor="let item of list" class="highlight">
+                        <div *ngIf="isParent(item.id); else notParent" class="div_parent">
+                            <input
+                            type="checkbox"
+                            id="{{ item.id }}"
+                            name="checked"
+                            [(ngModel)]="item.checked"
+                            (change)="onChecked(item.id, item.checked)"
+                            />
+                            <label for="{{ item.id }}">{{ item.title }}</label>
+                        </div>
+                        <ng-template #notParent >
+                            <ul>
+                                <input
+                                type="checkbox"
+                                id="{{ item.id }}"
+                                name="checked"
+                                [(ngModel)]="item.checked"
+                                (change)="onChecked(item.id, item.checked)"
+                                />
+                                <label for="{{ item.id }}">{{ item.title }}</label>
+                            </ul>
+                        </ng-template>
+                    </div>
+                </div>
+                <div *ngIf="selectedItems.length > 0; else noSelection">
+                    <mat-chip *ngFor="let item of selectedItems">
+                        {{item.title}}
+                    </mat-chip>
+                </div>
+                <ng-template #noSelection >
+                    <p>No item selected</p>
+                </ng-template>
+                    <p>You are choosing the tasks related to "Field name"</p>
+                    <button (click)="clearAll()">Clear All</button>
+                    <button >Assign</button>
+</section>

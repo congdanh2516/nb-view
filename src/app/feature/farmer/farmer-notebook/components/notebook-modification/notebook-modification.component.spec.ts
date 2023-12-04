@@ -5,6 +5,10 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {Component} from '@angular/core';
 import {MatIconModule} from '@angular/material/icon';
 import {NgFor} from '@angular/common';
+import {MatSelectModule} from '@angular/material/select';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
 
 
 
@@ -31,5 +35,5 @@ describe('NotebookModificationComponent', () => {
   styleUrls: ['notebook-modification.component.css'],
   templateUrl: 'notebook-modification.component.html',
   standalone: true,
-  imports: [MatIconModule,MatDividerModule,MatExpansionModule,NgFor],
+  imports: [MatIconModule,MatDividerModule,MatExpansionModule,NgFor,MatFormFieldModule, MatSelectModule,MatInputModule, FormsModule],
 })

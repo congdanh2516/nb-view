@@ -5,6 +5,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FarmerProcessModule } from './farmer-process/farmer-process.module';
 import { FarmerNotebookModule } from './farmer-notebook/farmer-notebook.module';
 import { FarmerRoutingModule } from './farmer-routing.module';
+import { MatSelectModule } from '@angular/material/select';
 
 
 
@@ -17,7 +18,7 @@ import { FarmerRoutingModule } from './farmer-routing.module';
     FarmerProcessModule,
     FarmerNotebookModule,
     FontAwesomeModule,
-    FarmerRoutingModule
+    FarmerRoutingModule, MatSelectModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

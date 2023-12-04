@@ -20,19 +20,35 @@ export class NotebookModificationComponent implements OnInit {
     this.listDataField = [];
 
     this.userForm = this.fb.group({
-      Title: [''],
-      Type: [''],
-      Task: [''],
+      Title: [],
+      Type: [],
+      Task: [],
+      isEdit: [false],
     })
 
   }
 
 
+  get valueTitle(){
+    return this.userForm.get('Title')?.value
+  }
+
+  get valueType(){
+    return this.userForm.get('Type')?.value
+  }
+
+  get valueTask(){
+    return this.userForm.get('Task')?.value
+  }
+
+
   public addField() {
     if(this.userForm.value != null)
-      this.listDataField.push(this.userForm.value);
-      this.userForm.reset();
-      this.clearAll()
+      if(this.valueTitle != null && this.valueType != null){
+        this.listDataField.push(this.userForm.value);
+        this.userForm.reset();
+        this.clearAll()
+      }
   }
 
 
@@ -46,6 +62,36 @@ export class NotebookModificationComponent implements OnInit {
       this.listDataField.splice(index,1);
     });
   }
+
+  editField(element: any, title: any, type: any, task: any) {
+    this.listDataField.forEach((value: any,index: any)=>{
+      if(value == element)
+      this.listDataField.splice(index,1);
+    });
+  }
+
+  edit(item: any){
+    this.listDataField.forEach((element: any) => {
+      element.isEdit = false;
+    });
+    item.isEdit = true;
+  }
+
+  update(item: any){
+    if(this.userForm.value != null)
+      if(this.valueTitle != null && this.valueType != null){
+        this.listDataField.push(this.userForm.value);
+        this.userForm.reset();
+        this.clearAll()
+        item.isEdit = false;
+        this.removeField(item)
+      }
+  }
+
+  cancel(item: any){
+    item.isEdit = false;
+  }
+
 
   get optionImage(){
     return 

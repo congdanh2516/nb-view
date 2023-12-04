@@ -112,12 +112,12 @@ mat-expansion-panel-header{
     border-bottom-color: 2px solid black;
 }
 
-table, th, td {
+th, td {
     text-align: center;
     margin: 10px;
     padding: 10px;
     background-color: #E9EDF0;
-    border: 3px solid;
+    border: 3px solid ;
   }
 
 
@@ -243,6 +243,10 @@ table, th, td {
     border-left-color: #f8f8f8;
     border-right-color: #f8f8f8;
     border-bottom-color: #000000;
+}
+
+.div_edit{
+    width: 460px;
 }
 
 

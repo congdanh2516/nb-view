@@ -12,7 +12,7 @@ import { ProcessDetailComponent } from 'src/app/feature/farmer/farmer-process/co
 export class UpdateProjectNameComponent {
   constructor(
     public dialogRef: MatDialogRef<ProcessDetailComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Project,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private projectService: ProjectService
   ) {}
   onNoClick(): void {
@@ -20,6 +20,18 @@ export class UpdateProjectNameComponent {
   }
 
   onYesClick(): void {
+    this.updateProjectName();
     this.dialogRef.close();
+  }
+
+  updateProjectName() {
+    this.projectService.updateProjectById(this.data.projectId).subscribe({
+      next: () => {
+        console.log('update project name');
+      },
+      error: () => {
+        console.log('error: update project name');
+      },
+    });
   }
 }

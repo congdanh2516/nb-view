@@ -1,6 +1,5 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Project } from 'src/app/core/models/project';
 import { ProjectService } from 'src/app/core/services/project/project.service';
 import { ProcessDetailComponent } from 'src/app/feature/farmer/farmer-process/components/process-detail/process-detail.component';
 
@@ -22,6 +21,7 @@ export class UpdateProjectDateComponent {
 
   onYesClick(): void {
     this.updateProject();
+    this.dialogRef.close();
   }
 
   updateProject() {
@@ -29,8 +29,11 @@ export class UpdateProjectDateComponent {
     this.projectSV.updateProjectById(this.project).subscribe({
       next: (data: any) => {
         this.project = data;
+        console.log('update project date');
+      },
+      error: () => {
+        console.log('error: update project date');
       },
     });
-    this.dialogRef.close();
   }
 }

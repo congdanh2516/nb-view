@@ -3,20 +3,30 @@ import { CommonModule } from '@angular/common';
 import { NotebookModificationComponent } from './components/notebook-modification/notebook-modification.component';
 import { NotebookViewComponent } from './components/notebook-view/notebook-view.component';
 import { FarmerNotenookRoutingModule } from './farmer-notebook-routing.module';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatChipsModule } from '@angular/material/chips';
+import { ModificationTaskComponent } from './components/notebook-modification/modification-task/modification-task.component';
+
+
 
 
 
 @NgModule({
   declarations: [
     NotebookModificationComponent,
-    NotebookViewComponent
+    NotebookViewComponent,
+    ModificationTaskComponent
   ],
   imports: [
     CommonModule,
-    FarmerNotenookRoutingModule
+    FarmerNotenookRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,MatChipsModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],
 })
 export class FarmerNotebookModule { }
+

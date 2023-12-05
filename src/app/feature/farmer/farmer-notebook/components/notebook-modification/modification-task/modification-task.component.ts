@@ -1,61 +1,36 @@
-import { Component,ElementRef,OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-notebook-modification',
-  templateUrl: './notebook-modification.component.html',
-  styleUrls: ['./notebook-modification.component.scss']
+  selector: 'app-modification-task',
+  templateUrl: './modification-task.component.html',
+  styleUrls: ['./modification-task.component.scss']
 })
-
-export class NotebookModificationComponent implements OnInit {
-
-  panelOpenState = true;
-
-  userForm: FormGroup;
-
-
-  listDataField: any;
-
-  constructor(private fb:FormBuilder) {
-    this.listDataField = [];
-
-    this.userForm = this.fb.group({
-      Title: [''],
-      Type: [''],
-      Task: [''],
-    })
-
-  }
-
-
-  public addField() {
-    if(this.userForm.value != null)
-      this.listDataField.push(this.userForm.value);
-      this.userForm.reset();
-      this.clearAll()
-  }
-
-
-  reset() {
-    this.userForm.reset();
-  }
-
-  removeField(element: any) {
-    this.listDataField.forEach((value: any,index: any)=>{
-      if(value == element)
-      this.listDataField.splice(index,1);
-    });
-  }
-
-  get optionImage(){
-    return 
-  }
-
-
-  ngOnInit() {}
+export class ModificationTaskComponent implements OnInit {
   
 
+ constructor() {}
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
+
+  count = 5;
+  @Output()
+
+  countChanged: EventEmitter<number> = new EventEmitter<number>();
   
+  increment(){
+    this.count++;
+    this.countChanged.emit(this.count);
+  }
+  
+  decrement(){
+    this.count--;
+    this.countChanged.emit(this.count);
+  }
+
+  
+
 
   list = [
     {
@@ -140,11 +115,6 @@ export class NotebookModificationComponent implements OnInit {
 
   identifyParent(id: string){
     return id.slice(-1)
-  }
-
-  countParent: number | undefined;
-  countChangedHandle(count: number) {
-    this.countParent = count;
   }
 
 }

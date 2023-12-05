@@ -133,9 +133,9 @@
             </div>
             <div class="field-creation__title__type" *ngIf="field.isEdited">
                 <select name="" id="">
-                    <option value="">văn bản</option>
+                    <option value="">Văn bản</option>
                     <option value="">hình ảnh</option>
-                    <option value="">âm thanh</option>
+                    <option value="">Âm thanh</option>
                 </select>
             </div>
         </div>
@@ -146,50 +146,57 @@
             <div class="field-creation__related-task__title" *ngIf="field.task.length > 0">
                 Công việc liên quan
             </div>
-            <div class="field-creation__related-task__list" *ngIf="field.task.length > 0, else noTask">
+            <div class="field-creation__related-task__list" *ngIf="field.task.length > 0">
                 <!-- <span class="field-creation__related-task__list__item" *ngFor="let task of field.task"> -->
                     <mat-chip *ngFor="let task of field.task">{{ task }}</mat-chip>
                     <mat-chip (click)="opendAssignmentRelatedTask(i)">+</mat-chip>
                 <!-- </span> -->
             </div>
-            <ng-template class="field-creation__related-task__assign-btn"#noTask>
-                <div  (click)="opendAssignmentRelatedTask(i)">Gán công việc liên quan</div>
-            </ng-template>
+            <div class="field-creation__related-task__assign-btn" *ngIf="field.task.length == 0" (click)="opendAssignmentRelatedTask(i)">
+                Gán công việc liên quan
+            </div>
+            <div class="field-creation__related-task__delete-btn">
+                <!-- <fa-icon [icon]="faTrash"></fa-icon> -->
+                Xóa
+            </div>
         </div>
     </div>
-    <div class="field-creation">
+    <div class="field-creation"
+        [class.field-creation--isNotEdited]="!newField.isEdited"
+    >
         <div class="field-creation__title">
             <div class="field-creation__title__title-input">
-                <input type="text" [(ngModel)]="newField.title" class="input--modification">
+                <input type="text" [(ngModel)]="newField.title" placeholder="Tên trường" class="input--modification">
             </div>
-            <div class="field-creation__title__type">
+            <div class="field-creation__title__type" *ngIf="newField.isEdited">
                 <select name="" id="" [(ngModel)]="newField.type">
-                    <option value="">abc</option>
-                    <option value="">abc</option>
-                    <option value="">abc</option>
+                    <option value="text">Văn bản</option>
                 </select>
             </div>
         </div>
         <div class="field-creation__description">
             <input type="text" placeholder="Văn bản" readonly>
         </div >
-        <div class="field-creation__related-task">
-            <div class="field-creation__related-task__title">
+        <div class="field-creation__related-task" *ngIf="newField.isEdited">
+            <div class="field-creation__related-task__title" *ngIf="newField.task.length>0">
                 Công việc liên quan
             </div>
-            <div class="field-creation__related-task__list" >
-                <!-- <span class="field-creation__related-task__list__item" *ngFor="let task of field.task"> -->
-                    <!-- <mat-chip *ngFor="let task of field.task">{{ task }}</mat-chip>
-                    <mat-chip (click)="opendAssignmentRelatedTask(i)">+</mat-chip> -->
-                <!-- </span> -->
+            <div class="field-creation__related-task__list" *ngIf="newField.task.length>0">
+                <span class="field-creation__related-task__list__item">
+                    <mat-chip *ngFor="let task of newField.task">{{ task }}</mat-chip>
+                    <mat-chip (click)="opendAssignmentRelatedTask(fieldList.length)">+</mat-chip>
+                </span>
             </div>
-            <div class="field-creation__related-task__assign-btn"#noTask>
+            <div class="field-creation__related-task__assign-btn" *ngIf="newField.task.length==0">
                 <div  (click)="opendAssignmentRelatedTask(fieldList.length)">Gán công việc liên quan</div>
             </div>
         </div>
     </div>
+    <!-- <div (click)="addNewField()" class="field-creation__add-new-field">
+        Thêm trường mới
+    </div> -->
     <div class="button">
-        <div class="button__add-new-field-btn" (click)="addNewField()">Thêm trường mới</div>
+        <!-- <div class="button__add-new-field-btn" (click)="addNewField()">Thêm trường mới</div> -->
         <div class="button__save-btn">Lưu</div>
     </div>
 </div>

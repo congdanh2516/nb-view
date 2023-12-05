@@ -1,5 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-modification-task',
@@ -9,73 +10,59 @@ import { FormGroup } from '@angular/forms';
 export class ModificationTaskComponent implements OnInit {
   
 
- constructor() {}
+ constructor(public dialogRef: MatDialogRef<ModificationTaskComponent>,
+            @Inject(MAT_DIALOG_DATA) public data: any,
+  ) {
+    
+  }
+
   ngOnInit(): void {
     throw new Error('Method not implemented.');
   }
 
-  count = 5;
-  @Output()
-
   countChanged: EventEmitter<number> = new EventEmitter<number>();
-  
-  increment(){
-    this.count++;
-    this.countChanged.emit(this.count);
-  }
-  
-  decrement(){
-    this.count--;
-    this.countChanged.emit(this.count);
-  }
-
-  
-
 
   taskList = [
     {
-      id: 'ParentTaska',
-      title: 'Task 1',
+      id: 'Task 1',
+      title: 'Chọn giống lúa',
       checked: false,
     },
     {
-      id: 'a1',
-      title: 'Task 2',
+      id: 'Task 2',
+      title: 'Xử lý đất',
       checked: false,
     },
     {
-      id: 'a2',
-      title: 'Task 3',
+      id: 'Task 3',
+      title: 'Ngâm giống',
       checked: false,
     },
     {
       id: 'a3',
-      title: 'Task 4',
+      title: 'Bón phân đợt 1',
       checked: false,
     },
     {
-      id: 'ParentTaskb',
+      id: 'Phun thuốc đợt 1',
       title: 'Task 5',
       checked: false,
     },
     {
-      id: 'b1',
-      title: 'Task 6',
+      id: 'a3',
+      title: 'Bón phân đợt 2',
       checked: false,
     },
     {
-      id: 'b2',
-      title: 'Task 7',
+      id: 'Phun thuốc đợt 2',
+      title: 'Task 5',
       checked: false,
-    },
-    {
-      id: 'b3',
-      title: 'Task 8',
-      checked: false,
-    },
+    }
   ];
 
-  form!: FormGroup;
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 
   //methods
   // onChecked(id: string, checked:boolean){

@@ -2,6 +2,7 @@ import { Component,ElementRef,OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ModificationTaskComponent } from './modification-task/modification-task.component';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-notebook-modification',
@@ -12,14 +13,14 @@ import { ModificationTaskComponent } from './modification-task/modification-task
 export class NotebookModificationComponent implements OnInit {
 
   panelOpenState = true;
-
+  faTrash=faTrash;
 
   listDataField: any;
 
   newField : any = {
-    title: 'Form tạo',
+    title: '',
     type: 'text',
-    task: [1, 2, 3],
+    task: [],
     isEdited: true
   }
 
@@ -27,27 +28,10 @@ export class NotebookModificationComponent implements OnInit {
 
   fieldList: Array<any> = [
     {
-      title: 'Field 2',
+      title: 'Chất lượng giống',
       type: 'text',
       task: ['Task 1', 'Task 2', "Task 3"],
-      isEdited: false
-    },
-    {
-      title: 'Field 3',
-      type: 'text',
-      task: ['Task 2', 'Task 5', "Task 7"],
-      isEdited: false
-    },  {
-      title: 'Field 4',
-      type: 'text',
-      task: ['Task 3', 'Task 4', "Task 6"],
-      isEdited: false
-    },
-    {
-      title: 'Field 5',
-      type: 'text',
-      task: [1, 2, 3],
-      isEdited: false
+      isEdited: true
     }
   ];
 
@@ -76,11 +60,15 @@ export class NotebookModificationComponent implements OnInit {
   }
 
   addNewField() {
-    this.newField.isEdited = false;
-    this.fieldList.push({...this.newField});
-    this.newField.title = '';
-    this.newField.type = '';
-    this.newField.task = [];
+    if(this.newField.title!='') {
+      this.newField.isEdited = false;
+      this.fieldList.push({...this.newField});
+      this.newField.title = '';
+      this.newField.type = 'text';
+      this.newField.task = [];
+      this.newField.isEdited = true;
+      console.log("fisldList: ", this.fieldList);
+    }
   }
 
   activeEditMode (index: any) {
@@ -91,6 +79,7 @@ export class NotebookModificationComponent implements OnInit {
       }
     })
     this.fieldIsEditing = {...this.fieldList[index]};
+    this.newField.isEdited=false;
   }
 
   updateInputValue(e: any, index: number) {
@@ -113,7 +102,10 @@ export class NotebookModificationComponent implements OnInit {
 
   opendAssignmentRelatedTask(index: number) {
     const dialogRef = this.dialog.open(ModificationTaskComponent, {
-      
+      data: {
+        fieldIndex: index,
+        taskListId: this.fieldList[index].task
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {

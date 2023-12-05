@@ -324,6 +324,7 @@ mat-chip{
         }
         &__related-task {
             margin-top: 25px;
+            position: relative;
             &__list {
                 width: 100%;
                 height: auto;
@@ -342,7 +343,14 @@ mat-chip{
                 
             }
             &__assign-btn {
-    
+                cursor: pointer;
+            }
+            &__delete-btn {
+                cursor: pointer;
+                border: 1px solid red;
+                position: sticky;
+                bottom: 10px;
+                right: 10px;
             }
         }
         transition: height 0.5s ease;
@@ -353,6 +361,10 @@ mat-chip{
         .input--modification {
             border: none;
             border-bottom: 1px solid black;
+        }
+        &__add-new-field {
+            padding: 10px;
+            cursor: pointer;
         }
     }
     
@@ -381,4 +393,8 @@ mat-chip{
 
     
     
+}
+
+::ng-deep .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) {
+    background-color: #E9EDF0 !important;
 }

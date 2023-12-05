@@ -44,16 +44,16 @@
         Gán công việc liên quan
     </div>
     <div class="task-list__task-name">
-        Trường nhập liệu: Tên trường nhập liệu
+        Trường nhập liệu: <b>Phân bón, thuốc bảo vệ thực vật, hóa chất</b>
     </div>
     <div class="task-list__list">
         <div class="task-list__list__item" *ngFor="let task of taskList; let i=index">
-            <input type="checkbox" name="selectedTask" id="task{{i}}" value="abc" tabindex="-1" (change)="checkCheckBoxvalue(task)">
+            <input type="checkbox" name="selectedTask" id="task{{i}}" value="abc" tabindex="-1" (change)="checkCheckBoxvalue(task)" [checked]="data?.taskListId.includes(task.id)">
             <label for="task{{i}}" class="task-list__list__item__name">{{ task.title }}</label>
         </div>
     </div>
     <div class="task-list__action">
-        <div class="task-list__action__cancel-btn">Hủy</div>
+        <div class="task-list__action__cancel-btn" (click)="onNoClick()">Hủy</div>
         <div class="task-list__action__assign-btn" (click)="allCheckBox()" >Lưu</div>
     </div>
 </div>

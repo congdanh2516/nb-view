@@ -60,8 +60,8 @@
 // }
 
 .task-list {
-    width: 500px;
-    height: 590px;
+    width: 600px;
+    // height: 590px;
     padding: 20px;
     &__heading {
         font: {
@@ -70,12 +70,12 @@
         }
     }
     &__task-name {
-        margin-top: 10px;
+        margin-top: 20px;
     }
     &__list {
-        margin-top: 15px;
+        margin-top: 20px;
         max-height: 400px;
-        height: 400px;
+        // height: 400px;
         overflow-y: auto;
         &__item {
             display: flex;
@@ -98,7 +98,7 @@
         }
     }
     &__action{
-        margin-top: 15px;
+        margin-top: 20px;
         display: flex;
         justify-content: right;
         &__assign-btn{
@@ -110,6 +110,7 @@
             @include button(100px,50px, absolute);
             border-radius: 3px;
             margin-right: 10px;
+            color: black;
         }
     }
 }

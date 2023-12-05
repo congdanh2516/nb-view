@@ -18,18 +18,18 @@ export class NotebookService {
     );
   }
 
-  createNotebook(notebook: Notebook) {
-    let api: string = environment.urlNB + 'notebooks';
-    return this.httpClient.post(api, notebook).pipe(
-      tap(() => console.log('create notebook successfully')),
+  getAllNotebooks() {
+    let api: string = environment.urlNB + `notebooks`;
+    return this.httpClient.get(api).pipe(
+      tap(() => console.log('get all notebook successfully')),
       catchError(this.handleError)
     );
   }
 
-  updateNotebook(notebook: Notebook) {
+  createNotebook(notebook: Notebook) {
     let api: string = environment.urlNB + 'notebooks';
     return this.httpClient.post(api, notebook).pipe(
-      tap(() => console.log('update notebook successfully')),
+      tap(() => console.log('create notebook successfully')),
       catchError(this.handleError)
     );
   }

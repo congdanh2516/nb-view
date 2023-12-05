@@ -18,7 +18,7 @@ export class ValueService {
     );
   }
 
-  createValue(value: Value) {
+  createValue(value: any) {
     let api: string = environment.urlNB + 'values';
     return this.httpClient.post(api, value).pipe(
       tap(() => console.log('create value succeccfully')),
@@ -26,7 +26,7 @@ export class ValueService {
     );
   }
 
-  updateValue(value: Value) {
+  updateValue(value: any) {
     let api: string = environment.urlNB + 'values';
     return this.httpClient.patch(api, value).pipe(
       tap(() => console.log('update value succeccfully')),

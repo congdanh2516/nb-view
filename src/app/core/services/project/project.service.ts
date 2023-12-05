@@ -10,12 +10,48 @@ import { Project } from '../../models/project';
 export class ProjectService {
   constructor(private httpClient: HttpClient) {}
 
+  getAllProject() {
+    let api: string = environment.url + `projects`;
+    return this.httpClient.get(api).pipe(
+      tap(() => {
+        console.log('call api get all project ');
+      }),
+      catchError(this.handleError)
+    );
+  }
+
+  getAllProjectByCreatorId(creatorId: string) {
+    let api: string = environment.url + `projects?userId=${creatorId}`;
+    return this.httpClient.get(api).pipe(
+      tap(() => {
+        console.log('call api get all project by creator');
+      }),
+      catchError(this.handleError)
+    );
+  }
+
+  getProjectIstemplate() {
+    let api: string = environment.url + `projects?isTemplate=true`;
+    return this.httpClient.get(api).pipe(
+      tap(() => {
+        console.log('call api get project is template ');
+      }),
+      catchError(this.handleError)
+    );
+  }
+
   getProjectById(projectId: string) {
     let api: string = environment.url + `projects/${projectId}`;
     return this.httpClient.get(api).pipe(
       tap(() => console.log('get project by id: ')),
       catchError(this.handleError)
     );
+  }
+
+  createProjectClone(projectId: string, creatorId: string) {
+    let api: string =
+      environment.url + `projects/${projectId}/Clone?creatorId=${creatorId}`;
+    return this.httpClient.post(api, {});
   }
 
   updateProjectById(project: Project) {

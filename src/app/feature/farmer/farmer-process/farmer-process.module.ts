@@ -13,6 +13,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
+import { InformationTaskComponent } from './components/process-detail/information-box/information-task/information-task.component';
+import { InformationSubtaskComponent } from './components/process-detail/information-box/information-subtask/information-subtask.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { FormsModule } from '@angular/forms';
     ProcessListComponent,
     ProcessDetailComponent,
     ExampleComponent,
+    InformationTaskComponent,
+    InformationSubtaskComponent,
   ],
   imports: [
     CommonModule,

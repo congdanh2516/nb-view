@@ -6,26 +6,40 @@ import { ConfirmBoxModalComponent } from './confirm-box-modal/confirm-box-modal.
 import { ToastBoxModalComponent } from './toast-box-modal/toast-box-modal.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-
+import { UpdateProjectNameComponent } from './update-project-name/update-project-name.component';
+import { UpdateProjectDateComponent } from './update-project-date/update-project-date.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+import { InformationSubtaskComponent } from './information-box/information-subtask/information-subtask.component';
+import { InformationTaskComponent } from './information-box/information-task/information-task.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     FooterComponent,
     ConfirmBoxModalComponent,
-    ToastBoxModalComponent
+    ToastBoxModalComponent,
+    UpdateProjectNameComponent,
+    UpdateProjectDateComponent,
+    InformationSubtaskComponent,
+    InformationTaskComponent,
   ],
   imports: [
     CommonModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    CommonModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatMenuModule,
   ],
   exports: [
     HeaderComponent,
     ConfirmBoxModalComponent,
-    ToastBoxModalComponent
+    ToastBoxModalComponent,
+    UpdateProjectNameComponent,
+    UpdateProjectDateComponent,
   ],
-  schemas: [
-    CUSTOM_ELEMENTS_SCHEMA
-  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class SharedModule { }
+export class SharedModule {}

@@ -1,1 +1,79 @@
-<p>notebook-modification works!</p>
+<section>
+    <h2>Modify notebook</h2>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6 highlight">
+                <h3>Notebook</h3>
+                    <div>
+                        <h1>Count Parent: {{countParent}}</h1>
+                    </div>
+                <div class="highlight">
+                    <table *ngFor="let item of listDataField">
+                        <thead>
+                            <tr>
+                                <th class="th_title">Title</th>
+                                <th class="th_type">Type</th>
+                                <th class="th_task">Task</th>
+                                <th class="th_button"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span>{{item.Title}}</span></td>
+                                <td><span>{{item.Type}}</span></td>
+                                <td><span>{{item.Task}}</span></td>
+                                <td>
+                                    <button type="button" (click)="removeField(item)" class="button_table">Edit</button>
+                                    <button type="button" (click)="removeField(item)" class="button_table">remove</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="highlight">
+                    <button class="create_button" (click)="addField()"><mat-icon fontIcon="+"></mat-icon></button>
+                </div>
+                <div class="small_div">
+                    <div class=" container">
+                        <form [formGroup]="userForm" class="row">
+                            <div class="col-lg-6" >
+                                <input type='text' name="Title" formControlName="Title" placeholder="| Title" class="input"/>
+                            </div>
+                            <div class="col-lg-5">
+                                <select class="select" name="Type" formControlName="Type" class="select">
+                                    <option value="default" selected hidden>| Input type</option>
+                                    <option value="text">Text</option>
+                                    <option value="image">Image</option>
+                                </select>
+                            </div>
+                            
+                            <div class="row small_div">
+                                <mat-divider class="mat-divider_small"></mat-divider>
+                                <div *ngIf="selectedItems.length > 0; else noTask">
+                                    <p>Assign related tasks</p>
+                                </div>
+                                <ng-template #noTask >
+                                    <p>Related tasks</p>
+                                </ng-template>
+                                <div *ngIf="selectedItems.length > 0; else noSelection">
+                                    <mat-chip *ngFor="let item of selectedItems">
+                                        {{item.title}}
+                                    </mat-chip>
+                                </div>
+                                <ng-template #noSelection >
+                                    <p>No item selected</p>
+                                </ng-template>
+                                <button >Assign</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <button>Save</button>
+            </div>
+            <div class="col-lg-5 highlight">  
+                <app-modification-task (countChanged)='countChangedHandle($event)'></app-modification-task>
+            </div>
+        </div>
+    </div>
+</section>
+

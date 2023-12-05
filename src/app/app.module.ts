@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FarmerModule } from './feature/farmer/farmer.module';
+import { SharedModule } from './shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -18,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     FontAwesomeModule,
     MatExpansionModule,
+    SharedModule,
     HttpClientModule,
   ],
   providers: [],

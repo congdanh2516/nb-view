@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
+import { ConfirmBoxModalService } from './core/services/confirm-box-modal.service';
+import { ToastBoxModalService } from './core/services/toast-box-modal.service';
 
 @Component({
   selector: 'app-root',
@@ -11,4 +13,22 @@ export class AppComponent {
 
   faCircleUser = faCircleUser;
   panelOpenState = false;
+
+  notice: {
+    isDisplay: boolean,
+    message: string,
+    icon: string
+  } = {isDisplay: true, message: 'abc', icon: 'success'}
+
+  constructor(private toastSV: ToastBoxModalService) {
+    
+  }
+
+  ngOnInit() {
+    this.toastSV.getMessage().subscribe((message : any) => {
+      this.notice.isDisplay = message.isDisplay;
+      this.notice.message = message.message;
+      this.notice.icon = message.icon;
+    })
+  }
 }

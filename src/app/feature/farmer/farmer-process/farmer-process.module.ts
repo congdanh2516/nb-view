@@ -6,27 +6,29 @@ import { ProcessDetailComponent } from './components/process-detail/process-deta
 import { ExampleComponent } from './components/example/example.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-import {MatExpansionModule} from '@angular/material/expansion'; //copy tu Angular Material
+import { MatExpansionModule } from '@angular/material/expansion'; //copy tu Angular Material
 import { FarmerProcessRoutingModule } from './farmer-process-routing.module';
-
-
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
     FarmerProcessComponent,
     ProcessListComponent,
     ProcessDetailComponent,
-    ExampleComponent
+    ExampleComponent,
   ],
   imports: [
     CommonModule,
     FontAwesomeModule,
     FarmerProcessRoutingModule,
+    MatIconModule,
+    MatButtonModule,
+    MatMenuModule,
 
-    MatExpansionModule //copy ten đe xuong day
+    MatExpansionModule, //copy ten đe xuong day
   ],
-  schemas: [
-    CUSTOM_ELEMENTS_SCHEMA
-  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class FarmerProcessModule { }
+export class FarmerProcessModule {}

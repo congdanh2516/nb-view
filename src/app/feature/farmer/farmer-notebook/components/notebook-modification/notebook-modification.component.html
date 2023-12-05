@@ -112,6 +112,9 @@
 </section> -->
 
 <div class="notebook">
+    <div class="heading">   
+        <b>Chỉnh sửa sổ ghi</b>
+    </div>
     <div class="field-creation" 
         *ngFor="let field of fieldList; let i=index; trackBy: trackByFn" 
         [class.field-creation--isNotEdited]="!field.isEdited"
@@ -120,9 +123,10 @@
         <div class="field-creation__title">
             <div class="field-creation__title__title-input">
                 <input type="text" 
-                
+                    [(ngModel)]="!field.isEdited? fieldList[i]?.title : fieldIsEditing.title"
                     name="field{{i}}"
                     (blur)="resetFieldValue(i)"
+                    [class.input--editing]="field.isEdited"
                 >
                 <!-- [(ngModel)]="!field.isEdited? fieldList[i]?.title : fieldIsEditing.title"  -->
                 <!-- (keyup)="updateInputValue($event, i)" -->
@@ -156,7 +160,7 @@
     <div class="field-creation">
         <div class="field-creation__title">
             <div class="field-creation__title__title-input">
-                <input type="text" [(ngModel)]="newField.title">
+                <input type="text" [(ngModel)]="newField.title" class="input--modification">
             </div>
             <div class="field-creation__title__type">
                 <select name="" id="" [(ngModel)]="newField.type">
@@ -167,16 +171,26 @@
             </div>
         </div>
         <div class="field-creation__description">
-
+            <input type="text" placeholder="Văn bản" readonly>
         </div >
         <div class="field-creation__related-task">
-            
+            <div class="field-creation__related-task__title">
+                Công việc liên quan
+            </div>
+            <div class="field-creation__related-task__list" >
+                <!-- <span class="field-creation__related-task__list__item" *ngFor="let task of field.task"> -->
+                    <!-- <mat-chip *ngFor="let task of field.task">{{ task }}</mat-chip>
+                    <mat-chip (click)="opendAssignmentRelatedTask(i)">+</mat-chip> -->
+                <!-- </span> -->
+            </div>
+            <div class="field-creation__related-task__assign-btn"#noTask>
+                <div  (click)="opendAssignmentRelatedTask(fieldList.length)">Gán công việc liên quan</div>
+            </div>
         </div>
     </div>
-    <div class="btn">
-        
+    <div class="button">
+        <div class="button__add-new-field-btn" (click)="addNewField()">Thêm trường mới</div>
+        <div class="button__save-btn">Lưu</div>
     </div>
-    <button class="add-new-field-btn" (click)="addNewField()">Thêm trường mới</button>
-    <button class="save-btn">Lưu</button>
 </div>
 

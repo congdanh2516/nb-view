@@ -17,7 +17,7 @@ export class NotebookModificationComponent implements OnInit {
   listDataField: any;
 
   newField : any = {
-    title: 'Form tao',
+    title: 'Form tạo',
     type: 'text',
     task: [1, 2, 3],
     isEdited: true
@@ -30,24 +30,24 @@ export class NotebookModificationComponent implements OnInit {
       title: 'Field 2',
       type: 'text',
       task: ['Task 1', 'Task 2', "Task 3"],
-      isEdited: true
+      isEdited: false
     },
     {
       title: 'Field 3',
       type: 'text',
       task: ['Task 2', 'Task 5', "Task 7"],
-      isEdited: true
+      isEdited: false
     },  {
       title: 'Field 4',
       type: 'text',
       task: ['Task 3', 'Task 4', "Task 6"],
-      isEdited: true
+      isEdited: false
     },
     {
       title: 'Field 5',
       type: 'text',
       task: [1, 2, 3],
-      isEdited: true
+      isEdited: false
     }
   ];
 

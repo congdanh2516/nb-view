@@ -1,13 +1,11 @@
-<section>
+<!-- <section>
     <h2>Modify notebook</h2>
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-6 highlight">
-                <h3>Notebook</h3>
-                    <div>
-                        <h1>Count Parent: {{countParent}}</h1>
-                    </div>
-                <div class="highlight">
+                <h3>Notebook</h3> -->
+
+                <!-- <div class="highlight">
                     <table *ngFor="let item of listDataField">
                         <div *ngIf="item.isEdit" class="container div_edit">
                             <form [formGroup]="userForm" class="row">
@@ -65,26 +63,26 @@
                             </tbody>
                         </div>
                     </table>
-                </div>
-                <div class="highlight">
+                </div> -->
+                <!-- <div class="highlight">
                     <button class="create_button" (click)="addField()"><mat-icon fontIcon="+"></mat-icon></button>
-                </div>
-                <div class="small_div">
+                </div> -->
+                <!-- <div class="small-div" *ngFor="let field of fieldList" [class.small-div__isNotEdited]="field.status">
                     <div class=" container">
                         <form [formGroup]="userForm" class="row">
                             <div class="col-lg-6" >
                                 <input type='text' name="Title" formControlName="Title" placeholder="| Title" class="input"/>
                             </div>
-                            <div class="col-lg-5">
+                            <div class="col-lg-5" *ngIf="field.status">
                                 <select class="select" name="Type" formControlName="Type" class="select">
                                     <option value="default" selected hidden>| Input type</option>
                                     <option value="text">Text</option>
                                     <option value="image">Image</option>
                                 </select>
                             </div>
-                            
-                            <div class="row small_div">
-                                <mat-divider class="mat-divider_small"></mat-divider>
+                            <mat-divider class="mat-divider_small"></mat-divider>
+                            <div class="row small_div"  *ngIf="field.status">
+                                
                                 <div *ngIf="selectedItems.length > 0; else noTask">
                                     <p>Assign related tasks</p>
                                 </div>
@@ -103,13 +101,82 @@
                             </div>
                         </form>
                     </div>
-                </div>
-                <button>Save</button>
-            </div>
+                </div> -->
+               
+            <!-- </div>
             <div class="col-lg-5 highlight">  
                 <app-modification-task (countChanged)='countChangedHandle($event)'></app-modification-task>
             </div>
         </div>
     </div>
-</section>
+</section> -->
+
+<div class="notebook">
+    <div class="field-creation" 
+        *ngFor="let field of fieldList; let i=index; trackBy: trackByFn" 
+        [class.field-creation--isNotEdited]="!field.isEdited"
+        (click)="activeEditMode(i)"
+    >
+        <div class="field-creation__title">
+            <div class="field-creation__title__title-input">
+                <input type="text" 
+                
+                    name="field{{i}}"
+                    (blur)="resetFieldValue(i)"
+                >
+                <!-- [(ngModel)]="!field.isEdited? fieldList[i]?.title : fieldIsEditing.title"  -->
+                <!-- (keyup)="updateInputValue($event, i)" -->
+            </div>
+            <div class="field-creation__title__type" *ngIf="field.isEdited">
+                <select name="" id="">
+                    <option value="">văn bản</option>
+                    <option value="">hình ảnh</option>
+                    <option value="">âm thanh</option>
+                </select>
+            </div>
+        </div>
+        <div class="field-creation__description">
+            <input type="text" placeholder="Văn bản" readonly>
+        </div >
+        <div class="field-creation__related-task" *ngIf="field.isEdited">
+            <div class="field-creation__related-task__title" *ngIf="field.task.length > 0">
+                Công việc liên quan
+            </div>
+            <div class="field-creation__related-task__list" *ngIf="field.task.length > 0, else noTask">
+                <!-- <span class="field-creation__related-task__list__item" *ngFor="let task of field.task"> -->
+                    <mat-chip *ngFor="let task of field.task">{{ task }}</mat-chip>
+                    <mat-chip (click)="opendAssignmentRelatedTask(i)">+</mat-chip>
+                <!-- </span> -->
+            </div>
+            <ng-template class="field-creation__related-task__assign-btn"#noTask>
+                <div  (click)="opendAssignmentRelatedTask(i)">Gán công việc liên quan</div>
+            </ng-template>
+        </div>
+    </div>
+    <div class="field-creation">
+        <div class="field-creation__title">
+            <div class="field-creation__title__title-input">
+                <input type="text" [(ngModel)]="newField.title">
+            </div>
+            <div class="field-creation__title__type">
+                <select name="" id="" [(ngModel)]="newField.type">
+                    <option value="">abc</option>
+                    <option value="">abc</option>
+                    <option value="">abc</option>
+                </select>
+            </div>
+        </div>
+        <div class="field-creation__description">
+
+        </div >
+        <div class="field-creation__related-task">
+            
+        </div>
+    </div>
+    <div class="btn">
+        
+    </div>
+    <button class="add-new-field-btn" (click)="addNewField()">Thêm trường mới</button>
+    <button class="save-btn">Lưu</button>
+</div>
 

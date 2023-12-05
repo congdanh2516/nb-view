@@ -32,45 +32,45 @@ export class ModificationTaskComponent implements OnInit {
   
 
 
-  list = [
+  taskList = [
     {
       id: 'ParentTaska',
-      title: 'ParentTask a',
+      title: 'Task 1',
       checked: false,
     },
     {
       id: 'a1',
-      title: 'Taska 1',
+      title: 'Task 2',
       checked: false,
     },
     {
       id: 'a2',
-      title: 'Taska 2',
+      title: 'Task 3',
       checked: false,
     },
     {
       id: 'a3',
-      title: 'Taska 3',
+      title: 'Task 4',
       checked: false,
     },
     {
       id: 'ParentTaskb',
-      title: 'ParentTask b',
+      title: 'Task 5',
       checked: false,
     },
     {
       id: 'b1',
-      title: 'Taskb 1',
+      title: 'Task 6',
       checked: false,
     },
     {
       id: 'b2',
-      title: 'Taskb 2',
+      title: 'Task 7',
       checked: false,
     },
     {
       id: 'b3',
-      title: 'Taskb 3',
+      title: 'Task 8',
       checked: false,
     },
   ];
@@ -78,43 +78,60 @@ export class ModificationTaskComponent implements OnInit {
   form!: FormGroup;
 
   //methods
-  onChecked(id: string, checked:boolean){
-    if(this.isParent(id)){
-      this.list.forEach((item) => {
-        if(item.id.charAt(0) == id.slice(-1))
-          item.checked = checked;
-      })
-    }else {
-      const allChecked = this.list.every(
-        (item) => item.checked
-      );
-      this.list[0].checked = allChecked;
+  // onChecked(id: string, checked:boolean){
+  //   if(this.isParent(id)){
+  //     this.list.forEach((item) => {
+  //       if(item.id.charAt(0) == id.slice(-1))
+  //         item.checked = checked;
+  //     })
+  //   }else {
+  //     const allChecked = this.list.every(
+  //       (item) => item.checked
+  //     );
+  //     this.list[0].checked = allChecked;
 
-    }
-  }
+  //   }
+  // }
 
 
 
-  clearAll(){
-    this.list.forEach((item) => {
-      item.checked = false;
+  // clearAll(){
+  //   this.list.forEach((item) => {
+  //     item.checked = false;
+  //   })
+  // }
+
+  // get selectedItems(){
+  //   return this.list.filter((item) => item.checked) 
+  // }
+
+  // get valueOfItem(){
+  //   return this.list.filter((item) => item.checked)
+  // }
+
+  // isParent(id: string){
+  //   return id.startsWith('P')
+  // }
+
+  // identifyParent(id: string){
+  //   return id.slice(-1)
+  // }
+
+  checkCheckBoxvalue(index: any){
+    let selectedTask = document.getElementsByName('selectedTask');
+    console.log(selectedTask);
+    selectedTask.forEach((task: any) => {
+      if(task.checked) {
+        
+      }
     })
   }
 
-  get selectedItems(){
-    return this.list.filter((item) => item.checked) 
-  }
-
-  get valueOfItem(){
-    return this.list.filter((item) => item.checked)
-  }
-
-  isParent(id: string){
-    return id.startsWith('P')
-  }
-
-  identifyParent(id: string){
-    return id.slice(-1)
+  allCheckBox() {
+    this.taskList.forEach((task: any, i) => {
+      if(this.taskList[i].checked = true)
+      console.log(this.taskList[i].title);
+    })
   }
 
 }

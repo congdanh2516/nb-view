@@ -1,6 +1,4 @@
-<section>
-    <button (click)="increment()">increment</button>
-    <button (click)="decrement()">decrement</button>
+<!-- <section>
     <h3>Process name</h3>
                 <div class="selectAll highlight div_checkbox">
                     <div *ngFor="let item of list" class="highlight">
@@ -39,4 +37,23 @@
                     <p>You are choosing the tasks related to "Field name"</p>
                     <button (click)="clearAll()">Clear All</button>
                     <button >Assign</button>
-</section>
+</section> -->
+
+<div class="task-list">
+    <div class="task-list__heading">
+        Gán công việc liên quan
+    </div>
+    <div class="task-list__task-name">
+        Trường nhập liệu: Tên trường nhập liệu
+    </div>
+    <div class="task-list__list">
+        <div class="task-list__list__item" *ngFor="let task of taskList; let i=index">
+            <input type="checkbox" name="selectedTask" id="task{{i}}" value="abc" tabindex="-1" (change)="checkCheckBoxvalue(task)">
+            <label for="task{{i}}" class="task-list__list__item__name">{{ task.title }}</label>
+        </div>
+    </div>
+    <div class="task-list__action">
+        <div class="task-list__action__cancel-btn">Hủy</div>
+        <div class="task-list__action__assign-btn" (click)="allCheckBox()" >Lưu</div>
+    </div>
+</div>

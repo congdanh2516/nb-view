@@ -46,6 +46,7 @@ export class ProcessListComponent {
     this.projectSV.getAllProject().subscribe({
       next: (data: any) => {
         this.projectList = data;
+        console.log('data:', this.projectList);
       },
       error: () => {
         console.log('error: getAllProject');
@@ -57,6 +58,7 @@ export class ProcessListComponent {
     this.projectSV.getAllProjectByCreatorId(creatorId).subscribe({
       next: (data: any) => {
         this.projectListByCreatorId = data;
+        console.log('data 1: ', this.projectListByCreatorId);
       },
       error: () => {
         console.log('error: getAllProjectByCreatorId');

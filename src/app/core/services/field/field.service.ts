@@ -18,7 +18,23 @@ export class FieldService {
     );
   }
 
-  createField(field: Field) {
+  getFieldByNotebookId(notebookId: string) {
+    let api: string = environment.urlNB + `fields?notebookId=${notebookId}`;
+    return this.httpClient.get(api).pipe(
+      tap(() => console.log('get field by notebookId')),
+      catchError(this.handleError)
+    );
+  }
+
+  getFieldByTaskId(taskId: string) {
+    let api: string = environment.urlNB + `fields?taskId=${taskId}`;
+    return this.httpClient.get(api).pipe(
+      tap(() => console.log('get field by taskId')),
+      catchError(this.handleError)
+    );
+  }
+
+  createField(field: any) {
     let api: string = environment.urlNB + 'fields';
     return this.httpClient.post(api, field).pipe(
       tap(() => console.log('create field successfully')),
@@ -26,7 +42,7 @@ export class FieldService {
     );
   }
 
-  updateField(field: Field) {
+  updateField(field: any) {
     let api: string = environment.urlNB + 'fields';
     return this.httpClient.patch(api, field).pipe(
       tap(() => console.log('update field successfully')),

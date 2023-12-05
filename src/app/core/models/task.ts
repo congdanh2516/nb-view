@@ -4,6 +4,7 @@ export interface Task {
   taskDescription: string | null;
   taskStartAt: Date | undefined | null;
   taskEndAt: Date | undefined | null;
+  taskStatus: string;
   taskDuration: number | undefined;
   projectId: string | undefined;
 }

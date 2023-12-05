@@ -10,8 +10,8 @@ import { Task } from '../../models/task';
 export class TaskService {
   constructor(private httpClient: HttpClient) {}
 
-  getTaskList() {
-    let api: string = environment.url + 'tasks';
+  getTaskListByProjectId(projectId: string) {
+    let api: string = environment.url + `tasks?api=${projectId}`;
     return this.httpClient.get(api).pipe(
       tap(() => console.log('get task list')),
       catchError(this.handleError)

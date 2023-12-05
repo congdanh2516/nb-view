@@ -11,6 +11,8 @@ import { FarmerProcessRoutingModule } from './farmer-process-routing.module';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,8 +28,9 @@ import { MatMenuModule } from '@angular/material/menu';
     MatIconModule,
     MatButtonModule,
     MatMenuModule,
-
-    MatExpansionModule, //copy ten đe xuong day
+    MatDialogModule,
+    MatExpansionModule, //copy ten đe xuong day,
+    FormsModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

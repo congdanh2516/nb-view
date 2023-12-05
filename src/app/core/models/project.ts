@@ -1,9 +1,9 @@
 export interface Project {
   projectId?: string;
-  projectName: string;
-  projectStartAt: Date | null;
-  projectEndAt: Date | null;
-  projectDuration: number;
-  projectStatus: string;
-  projectCreatorId: string;
+  projectName: string | undefined;
+  projectStartAt: any;
+  projectEndAt: any;
+  projectDuration: number | undefined | null;
+  projectStatus: string | undefined;
+  projectCreatorId: string | undefined;
 }

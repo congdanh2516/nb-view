@@ -11,7 +11,7 @@ export class ProjectService {
   constructor(private httpClient: HttpClient) {}
 
   getProjectById(projectId: string) {
-    let api: string = environment.url + 'projects';
+    let api: string = environment.url + `projects/${projectId}`;
     return this.httpClient.get(api).pipe(
       tap(() => console.log('get project by id: ')),
       catchError(this.handleError)
@@ -32,6 +32,11 @@ export class ProjectService {
       tap(() => console.log('delete project successfully')),
       catchError(this.handleError)
     );
+  }
+
+  scheduleProcess(projectId: any) {
+    let api: string = environment.url + `projects/${projectId}/schedule`;
+    return this.httpClient.post(api, {});
   }
 
   private handleError(error: HttpErrorResponse) {

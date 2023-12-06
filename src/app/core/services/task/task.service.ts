@@ -26,6 +26,16 @@ export class TaskService {
     );
   }
 
+  getAllDependencyByTaskId(taskId: string) {
+    let api: string = environment.url + `task/${taskId}/dependencies`;
+    return this.httpClient.get(api).pipe(
+      tap(() => {
+        console.log('call api get all dependencies');
+      }),
+      catchError(this.handleError)
+    );
+  }
+
   getSubtaskList(taskId: string) {
     let api: string = environment.url + `tasks/${taskId}/subtasks`;
     return this.httpClient.get(api).pipe(

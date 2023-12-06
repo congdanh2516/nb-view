@@ -57,4 +57,15 @@ export class InformationTaskComponent {
       },
     });
   }
+  // getDependencies(taskId: string) {
+  //   this.taskSV.getAllDependencyByTaskId(taskId).subscribe({
+  //     next: (res: any) => {
+  //       console.log('get all dependencies');
+  //       this.prerequisiteList = res;
+  //     },
+  //     error: (err) => {
+  //       console.log('error', err);
+  //     },
+  //   });
+  // }
 }

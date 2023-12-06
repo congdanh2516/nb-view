@@ -9,8 +9,8 @@ import { ProjectService } from 'src/app/core/services/project/project.service';
 import { TaskService } from 'src/app/core/services/task/task.service';
 import { SubtaskService } from 'src/app/core/services/subtask/subtask.service';
 import { format } from 'src/app/utils/date-utils';
-import { InformationTaskComponent } from 'src/app/shared/information-box/information-task/information-task.component';
-import { InformationSubtaskComponent } from 'src/app/shared/information-box/information-subtask/information-subtask.component';
+import { InformationTaskComponent } from './information-box/information-task/information-task.component';
+import { InformationSubtaskComponent } from './information-box/information-subtask/information-subtask.component';
 
 @Component({
   selector: 'app-process-detail',
@@ -78,27 +78,39 @@ export class ProcessDetailComponent {
 
   updateDialogProjectName(project: Project) {
     const dialogRef = this.dialog.open(UpdateProjectNameComponent, {
-      width: '500px',
       data: {
         projectId: project.projectId,
         projectName: project.projectName,
       },
     });
     dialogRef.afterClosed().subscribe(() => {
-      this.getProjectListNSchedule();
+      this.route.params.subscribe((params: any) => {
+        this.getProjectById(params.id);
+      });
+      this.ProjectSV.scheduleProcess(this.projectId).subscribe({
+        next: () => {
+          this.getProjectById(this.projectId);
+        },
+      });
     });
   }
 
   updateDialogProjectDate(project: Project) {
     const dialogRef = this.dialog.open(UpdateProjectDateComponent, {
-      width: '500px',
       data: {
         projectId: project.projectId,
         projectStartAt: project.projectStartAt,
       },
     });
     dialogRef.afterClosed().subscribe(() => {
-      this.getProjectListNSchedule();
+      this.route.params.subscribe((params: any) => {
+        this.ProjectSV.scheduleProcess(params.id).subscribe((data) => {
+          console.log('modify start date: ', data);
+          this.getProjectById(params.id);
+          this.getTaskListByProjectId(this.projectId);
+        });
+        this.getProjectListNSchedule();
+      });
     });
   }
 

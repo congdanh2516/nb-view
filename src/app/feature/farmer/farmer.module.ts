@@ -8,12 +8,8 @@ import { FarmerRoutingModule } from './farmer-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatSelectModule } from '@angular/material/select';
 
-
-
 @NgModule({
-  declarations: [
-    FarmerComponent
-  ],
+  declarations: [FarmerComponent],
   imports: [
     CommonModule,
     FarmerProcessModule,
@@ -21,11 +17,9 @@ import { MatSelectModule } from '@angular/material/select';
     FontAwesomeModule,
     FarmerRoutingModule,
     SharedModule,
-    FarmerRoutingModule, 
-    MatSelectModule
+    FarmerRoutingModule,
+    MatSelectModule,
   ],
-  schemas: [
-    CUSTOM_ELEMENTS_SCHEMA
-  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class FarmerModule { }
+export class FarmerModule {}

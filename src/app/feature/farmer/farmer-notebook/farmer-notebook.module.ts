@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatChipsModule } from '@angular/material/chips';
 import { ModificationTaskComponent } from './components/notebook-modification/modification-task/modification-task.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 
@@ -25,7 +26,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     FormsModule,
     ReactiveFormsModule,
     MatChipsModule,
-    MatDialogModule
+    MatDialogModule,
+    FontAwesomeModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

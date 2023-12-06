@@ -1,4 +1,4 @@
-<div class="process-list" *ngIf="personalProcessBool; else personalProcess">
+<div class="process-list" *ngIf="!personalProcessBool; else personalProcess">
   <div class="process-list__title">Chọn quy trình bắt đầu</div>
   <div class="process-list__list">
     <div class="process-list__list__item" *ngFor="let process of projectList">
@@ -11,7 +11,7 @@
       </div>
       <div class="process-list__list__item__action">
         <div class="process-list__list__item__action__detail-btn">Chi tiết</div>
-        <div class="process-list__list__item__action__selection-btn">Chọn</div>
+        <div class="process-list__list__item__action__selection-btn" (click)="confirmAddNewProcess(process)" >Chọn</div>
       </div>
     </div>
   </div>
@@ -53,16 +53,23 @@
           <div
             class="personal-process-list__executing-process__list__item__action"
           >
+          <div
+            class="personal-process-list__executing-process__list__item__action__delete-btn"
+            (click)="confirmDeleteProcess(process)"
+          >
+            Xóa
+          </div>
             <div
               class="personal-process-list__executing-process__list__item__action__detail-btn"
+              (click)="openProjectDetail(process.projectId)"
             >
               Chi tiết
             </div>
           </div>
         </div>
         <div
-          class="personal-process-list__executing-process__list__item--add-new"
-          (click)="addNewProcess()"
+          class=" personal-process-list__executing-process__list__item personal-process-list__executing-process__list__item--add-new"
+          (click)="openTemplateProcessPage()"
         >
           <fa-icon [icon]="faPlus"></fa-icon>
           Thêm quy trình

@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { LocalStorageService } from 'src/app/core/services/local-storage.service';
+import { TaskService } from 'src/app/core/services/task/task.service';
 
 @Component({
   selector: 'app-modification-task',
@@ -9,11 +11,18 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class ModificationTaskComponent implements OnInit {
   
+  taskList: any;
+  selectedTaskId: Array<any> = [];
 
  constructor(public dialogRef: MatDialogRef<ModificationTaskComponent>,
             @Inject(MAT_DIALOG_DATA) public data: any,
+            private taskSV: TaskService,
+            private localStorageSV: LocalStorageService
   ) {
-    
+    this.taskSV.getTaskListByProjectId(this.localStorageSV.getItem("project")?.projectId).subscribe((data) => {
+      this.taskList = data;
+      console.log("task listtt: ", this.taskList);
+    })
   }
 
   ngOnInit(): void {
@@ -22,43 +31,43 @@ export class ModificationTaskComponent implements OnInit {
 
   countChanged: EventEmitter<number> = new EventEmitter<number>();
 
-  taskList = [
-    {
-      id: 'Task 1',
-      title: 'Chọn giống lúa',
-      checked: false,
-    },
-    {
-      id: 'Task 2',
-      title: 'Xử lý đất',
-      checked: false,
-    },
-    {
-      id: 'Task 3',
-      title: 'Ngâm giống',
-      checked: false,
-    },
-    {
-      id: 'a3',
-      title: 'Bón phân đợt 1',
-      checked: false,
-    },
-    {
-      id: 'Phun thuốc đợt 1',
-      title: 'Task 5',
-      checked: false,
-    },
-    {
-      id: 'a3',
-      title: 'Bón phân đợt 2',
-      checked: false,
-    },
-    {
-      id: 'Phun thuốc đợt 2',
-      title: 'Task 5',
-      checked: false,
-    }
-  ];
+  // taskList = [
+  //   {
+  //     id: 'Task 1',
+  //     title: 'Chọn giống lúa',
+  //     checked: false,
+  //   },
+  //   {
+  //     id: 'Task 2',
+  //     title: 'Xử lý đất',
+  //     checked: false,
+  //   },
+  //   {
+  //     id: 'Task 3',
+  //     title: 'Ngâm giống',
+  //     checked: false,
+  //   },
+  //   {
+  //     id: 'a3',
+  //     title: 'Bón phân đợt 1',
+  //     checked: false,
+  //   },
+  //   {
+  //     id: 'Phun thuốc đợt 1',
+  //     title: 'Task 5',
+  //     checked: false,
+  //   },
+  //   {
+  //     id: 'a3',
+  //     title: 'Bón phân đợt 2',
+  //     checked: false,
+  //   },
+  //   {
+  //     id: 'Phun thuốc đợt 2',
+  //     title: 'Task 5',
+  //     checked: false,
+  //   }
+  // ];
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -105,20 +114,21 @@ export class ModificationTaskComponent implements OnInit {
   // }
 
   checkCheckBoxvalue(index: any){
+    this.selectedTaskId = [];
     let selectedTask = document.getElementsByName('selectedTask');
     console.log(selectedTask);
     selectedTask.forEach((task: any) => {
       if(task.checked) {
-        
+        this.selectedTaskId.push(task.value);
       }
     })
+    console.log("dnfs", this.selectedTaskId);
   }
 
   allCheckBox() {
-    this.taskList.forEach((task: any, i) => {
-      if(this.taskList[i].checked = true)
-      console.log(this.taskList[i].title);
-    })
+    
   }
+
+  
 
 }

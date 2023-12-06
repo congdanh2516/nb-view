@@ -30,6 +30,7 @@ export class AuthenticationService {
     return this.httpClient.get(api, { headers: header }).pipe(
       tap((data: any) => {
         this.localStorageSV.setItem('name', data.username);
+        this.localStorageSV.setItem('userId', data.userId)
         this.userId = data.userId;
         this.router.navigateByUrl('/farmer/process/list');
         this.toastSV.sendMessage({

@@ -3,6 +3,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ModificationTaskComponent } from './modification-task/modification-task.component';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FieldService } from 'src/app/core/services/field/field.service';
+import { LocalStorageService } from 'src/app/core/services/local-storage.service';
+import { TaskService } from 'src/app/core/services/task/task.service';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { Router } from '@angular/router';
+import { ToastBoxModalService } from 'src/app/core/services/toast-box-modal.service';
 
 @Component({
   selector: 'app-notebook-modification',
@@ -12,62 +18,103 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 export class NotebookModificationComponent implements OnInit {
 
+  faArrowLeft=faArrowLeft;
+
   panelOpenState = true;
   faTrash=faTrash;
 
   listDataField: any;
 
+  isDispleyAddNewForm = false;
+
   newField : any = {
-    title: '',
-    type: 'text',
-    task: [],
-    isEdited: true
+      fieldName: '',
+      fieldTypeId: 1,
+      fieldTaskIds: [],
+      isEdited: true
   }
 
-  fieldIsEditing: any;
-
+  fieldIsEditing: any = {
+    fieldName: '',
+    fieldTypeId: 1,
+    fieldTaskIds: [],
+    isEdited: true
+}
   fieldList: Array<any> = [
     {
-      title: 'Chất lượng giống',
-      type: 'text',
-      task: ['Task 1', 'Task 2', "Task 3"],
+      fieldName: 'Chất lượng giống',
+      fieldTypeId: 1,
+      fieldTaskIds: [],
       isEdited: true
     }
   ];
+
+  fieldListId: any = [];
+  fieldListIdBackup: any = [];
+
+  taskNameList: any = [];
+  taskList: any;
 
   test: string = "abc"
 
   fieldListBackup : any = [];
 
-  
-  constructor(public dialog: MatDialog) {
-    console.log("init: ", this.fieldList);
-    // this.opendAssignmentRelatedTask(1);
+  notebookId: any;
 
+  
+  constructor(public dialog: MatDialog,
+              private fieldSV: FieldService,
+              private localStorageSV: LocalStorageService,
+              private taskSV: TaskService,
+              private router: Router,
+              private toastSV: ToastBoxModalService
+  ) {
+    this.notebookId = this.localStorageSV.getItem("notebook")?.notebookId;
+    this.fieldSV.getFieldByNotebookId(this.localStorageSV.getItem("notebook")?.notebookId).subscribe((data: any) => {
+      this.fieldList = data;
+      console.log("field list: ", this.fieldList);
+      this.fieldList.forEach((field: any, index) => {
+        this.fieldListId.push(field.fieldId);
+        this.fieldListIdBackup.push(field.fieldId);
+        field.isEdited = false;
+        console.log("object: ", field.fieldTaskIds);
+        let taskName: any = [];
+        field.fieldTaskIds.forEach((taskId: any) => {
+          this.taskSV.getTaskById(taskId).subscribe((data: any) => {
+            console.log("7777: ", data);
+            taskName.push(data.taskName);
+            console.log("taskName: ", taskName);
+            this.taskNameList[index]=[...taskName];
+          })
+        })
+      })
+      this.fieldListBackup = [...this.fieldList];
+    })
+
+    this.taskSV.getTaskListByProjectId(this.localStorageSV.getItem("project")?.projectId).subscribe((data) => {
+      this.taskList = data;
+      console.log("task listtt: ", this.taskList);
+    })
   }
 
 
   public addField() {
-    // if(this.userForm.value != null)
-    //   if(this.valueTitle != null && this.valueType != null){
-    //     this.listDataField.push(this.userForm.value);
-    //     this.userForm.reset();
-    //     this.clearAll()
-    //   }
     console.log("abc");
     this.fieldList[0].isEdited = !this.fieldList[0].isEdited;
     console.log(this.fieldList);
   }
 
   addNewField() {
-    if(this.newField.title!='') {
+    if(this.newField.fieldName!='') {
       this.newField.isEdited = false;
       this.fieldList.push({...this.newField});
-      this.newField.title = '';
-      this.newField.type = 'text';
-      this.newField.task = [];
+      this.newField.fieldName = '';
+      this.newField.fieldType = 'text';
+      this.newField.fieldTaskIds = [];
       this.newField.isEdited = true;
       console.log("fisldList: ", this.fieldList);
+    } else {
+      this.isDispleyAddNewForm = true;
     }
   }
 
@@ -103,14 +150,71 @@ export class NotebookModificationComponent implements OnInit {
   opendAssignmentRelatedTask(index: number) {
     const dialogRef = this.dialog.open(ModificationTaskComponent, {
       data: {
+        fieldname: this.fieldList[index].fieldName,
         fieldIndex: index,
-        taskListId: this.fieldList[index].task
+        taskListId: this.fieldList[index]?.fieldTaskIds
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      console.log('The dialog was closed', result);
+      this.fieldList[index].fieldTaskIds = result;
+      let taskName: any = [];
+      this.fieldList[index].fieldTaskIds.forEach((taskId: any) => {
+        this.taskSV.getTaskById(taskId).subscribe((data: any) => {
+          console.log("7777: ", data);
+          taskName.push(data.taskName);
+          this.taskNameList[index]=[...taskName];
+        })
+      })
+      console.log("field list update: ", this.fieldList);
     });
+  }
+
+  addEachField(fieldInfo: any) {
+    let newField = {
+      fieldName: fieldInfo.fieldName,
+      fieldTypeId: 1,
+      fieldNotebookId: this.notebookId,// notebookId,
+      fieldTaskIds: fieldInfo.fieldTaskIds
+    }
+    this.fieldSV.createField(newField).subscribe((data: any) => {
+      console.log("add each field: ", data);
+    })
+  }
+
+  addAllField() {
+    this.fieldListIdBackup.forEach((field: any) => {
+      this.fieldSV.deleteField(field).subscribe((data) => {
+        console.log(data);
+      })
+    })
+    console.log("field lisy: ", this.fieldList);
+    setTimeout(() => {
+      this.fieldList.forEach((field: any) => {
+        this.addEachField(field);
+        this.toastSV.sendMessage({
+          isDisplay: true,
+          message: 'Cập nhật notebook thành công',
+          icon: 'success',
+        });
+      })
+      // location.reload();
+    }, 1000)
+    
+    console.log("field List before post: ", this.fieldListBackup);
+  }
+
+  getTaskNameById(taskId: any) {
+    for(let i=0; this.taskList.length; i++) {
+      if(taskId==this.taskList[i].taskId) {
+        return taskId.taskId;
+      }
+    }
+  }
+
+  backtoDetail() {
+    this.router.navigateByUrl("/farmer/process/detail")
   }
 
   // reset() {

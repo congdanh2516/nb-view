@@ -18,7 +18,7 @@ export class AppComponent {
     isDisplay: boolean,
     message: string,
     icon: string
-  } = {isDisplay: true, message: 'abc', icon: 'success'}
+  } = {isDisplay: false, message: 'abc', icon: 'success'}
 
   constructor(private toastSV: ToastBoxModalService) {
     

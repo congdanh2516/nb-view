@@ -4,7 +4,7 @@ import { ProcessDetailComponent } from './components/process-detail/process-deta
 import { ProcessListComponent } from './components/process-list/process-list.component';
 
 const routes: Routes = [
-  { path: 'detail/:id', component: ProcessDetailComponent },
+  { path: 'detail', component: ProcessDetailComponent },
   { path: 'list', component: ProcessListComponent },
 ];
 

@@ -4,6 +4,8 @@ import { catchError, tap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Task } from '../../models/task';
 
+const api = 'http://103.221.220.183:8081/tasks';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -11,11 +13,7 @@ export class TaskService {
   constructor(private httpClient: HttpClient) {}
 
   getTaskListByProjectId(projectId: string) {
-    let api: string = environment.url + `tasks?api=${projectId}`;
-    return this.httpClient.get(api).pipe(
-      tap(() => console.log('get task list')),
-      catchError(this.handleError)
-    );
+    return this.httpClient.get<Task[]>(`${api}?projectId=${projectId}`);
   }
 
   getTaskById(taskId: string) {

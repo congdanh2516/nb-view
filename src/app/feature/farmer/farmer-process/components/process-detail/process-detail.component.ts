@@ -4,13 +4,16 @@ import { Project } from 'src/app/core/models/project';
 import { UpdateProjectNameComponent } from 'src/app/shared/update-project-name/update-project-name.component';
 import { MatDialog } from '@angular/material/dialog';
 import { UpdateProjectDateComponent } from 'src/app/shared/update-project-date/update-project-date.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectService } from 'src/app/core/services/project/project.service';
 import { TaskService } from 'src/app/core/services/task/task.service';
 import { SubtaskService } from 'src/app/core/services/subtask/subtask.service';
 import { format } from 'src/app/utils/date-utils';
 import { InformationTaskComponent } from 'src/app/shared/information-box/information-task/information-task.component';
 import { InformationSubtaskComponent } from 'src/app/shared/information-box/information-subtask/information-subtask.component';
+import { NotebookService } from 'src/app/core/services/notebook/notebook.service';
+import { LocalStorageService } from 'src/app/core/services/local-storage.service';
+import { FieldService } from 'src/app/core/services/field/field.service';
 
 @Component({
   selector: 'app-process-detail',
@@ -31,13 +34,20 @@ export class ProcessDetailComponent {
     private dialog: MatDialog,
     private route: ActivatedRoute,
     private ProjectSV: ProjectService,
-    private TaskSV: TaskService
+    private TaskSV: TaskService,
+    private notebokkSv: NotebookService,
+    private localStorageSV: LocalStorageService,
+    private fieldSV: FieldService,
+    private router: Router
   ) {
-    this.route.params.subscribe((params: any) => {
-      this.projectId = params.id;
-      this.getProjectById(params.id);
-      this.getTaskListByProjectId(params.id);
-    });
+    // this.route.params.subscribe((params: any) => {
+    //   this.projectId = params.id;
+    //   this.getProjectById(params.id);
+    //   this.getTaskListByProjectId(params.id);
+    // });
+    let projectId = this.localStorageSV.getItem("project")?.projectId;
+    this.getProjectById(projectId);
+    this.getTaskListByProjectId(projectId);
   }
 
   removeDisabledName() {
@@ -180,5 +190,41 @@ export class ProcessDetailComponent {
       },
       error: (error) => {},
     });
+  }
+
+  modifyNotebook() {
+    //goi api tao notebook, loi thi da co notebook, sau do goi api list notebook lay api notebook de list ra field
+    let notebookInfo = {
+      notebookName: 'abc',
+      notebookDescription: "xyz",
+      notebookProjectId: this.localStorageSV.getItem("project")?.projectId 
+    }
+    this.notebokkSv.createNotebook(notebookInfo).subscribe({
+      next: (res) => {
+        this.notebokkSv.getAllNotebooks().subscribe((notebookList: any) => {
+          notebookList.forEach((notebook: any) => {
+            if(notebook.notebokkProjectId == this.localStorageSV.getItem('project')?.projectId) {
+              this.localStorageSV.setItem("notebook", {notebookId: notebook.noteBookId});
+              this.router.navigateByUrl("/farmer/notebook/modification");
+            }
+          })
+        })
+      },
+      error: (error) => {
+        this.notebokkSv.getAllNotebooks().subscribe((notebookList: any) => {
+          console.log("get all notebook: ", notebookList);
+          notebookList.forEach((notebook: any) => {
+            if(notebook.noteBookProjectId == this.localStorageSV.getItem('project')?.projectId) {
+              this.localStorageSV.setItem("notebook", {notebookId: notebook.noteBookId});
+              this.router.navigateByUrl("/farmer/notebook/modification");
+            }
+          })
+        })
+      }
+    })
+  }
+
+  opendDiary() {
+    this.router.navigateByUrl('/farmer/notebook/view');
   }
 }
